@@ -1,8 +1,7 @@
 {
   "name": "amp-search-tool-client",
   "homepage": "https://spencercrose.github.io/amp-search-tool-client/",
-  "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
