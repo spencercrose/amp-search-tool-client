@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, FormControlLabel, IconButton, Menu, MenuItem, Switch, Toolbar, Typography } from '@mui/material';
+import { FormControlLabel, IconButton, Menu, MenuItem, Switch } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 interface MenuProps {
