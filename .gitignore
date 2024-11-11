@@ -20,7 +20,7 @@ Thumbs.db
 *.js
 *.js.map
 *.d.ts
-vite.config.*
+# vite.config.*
 build/
 .env
 
