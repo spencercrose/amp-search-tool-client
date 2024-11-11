@@ -28,6 +28,8 @@ jobs:
         with:
           name: production-files
           path: ./dist
+        env:
+          QUERY_API_URL: ${{ secrets.VITE_QUERY_API_URL }}
 
   deploy:
     name: Deploy
