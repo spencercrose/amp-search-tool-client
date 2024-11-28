@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { Box, Button, TextField, Typography, Paper, CircularProgress } from '@mui/material';
+import Response from './Response';
 
 interface ChatbotProps {
   mode: 'light' | 'dark';
@@ -10,9 +11,15 @@ interface ChatbotProps {
 // Type definitions for chatbot message
 interface ChatMessage {
   sender: 'user' | 'bot';
-  content: string;
+  content: string | React.ReactElement;
 }
 
+  /**
+   * A chatbot component for displaying a conversation with a bot.
+   * @param {ChatbotProps} props The properties for the chatbot component.
+   * @param {ChatbotProps.mode} mode The mode of the chatbot, either 'light' or 'dark'.
+   * @returns {React.ReactElement} The React element for the chatbot component.
+   */
 const Chatbot: React.FC<ChatbotProps> = ({ mode }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [userInput, setUserInput] = useState<string>('');
@@ -62,16 +69,19 @@ const Chatbot: React.FC<ChatbotProps> = ({ mode }) => {
 
     try {
       // Send the message to an external API (replace the URL with your API endpoint)
-      const response = await axios.post(`${import.meta.env.VITE_QUERY_API_URL}/query`, {
+      const response = await axios.post(`${import.meta.env.VITE_QUERY_API_URL}/retrieve`, {
+        session_id: "",
         message: userInput
       });
+
       // Add the bot's response to the chat
       const botMessage: ChatMessage = {
         sender: 'bot',
-        content: response.data || 'Sorry, I didn\'t understand that.'
+        content: <Response value={response?.data?.response} />
       };
       setMessages((prevMessages) => [...prevMessages, botMessage]);
     } catch (error) {
+      console.error('Error fetching response:', error);
       const errorMessage: ChatMessage = {
         sender: 'bot',
         content: 'Error: Unable to reach the API.'
